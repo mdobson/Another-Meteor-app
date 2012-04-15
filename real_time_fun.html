@@ -1,0 +1,133 @@
+<head>
+  <title>Fun with Real Time</title>
+</head>
+
+<body>
+  <div class="container">
+  	<div class="row">
+  	 <div class="span2">
+  	 	<br/>
+  		{{> login}}
+  		<br/>
+  		{{> friends}}
+  		{{> followers}}
+  	 </div>
+
+  	 <div class="offset2 span8">
+  		<h3>Here are some posts of yours</h3>
+  		<br/>
+  		{{> posts}}
+  	 </div>
+  </div>
+  </div>
+</body>
+
+<template name="login">
+	{{#if userset}}
+		{{> greeting}}
+	{{else}}
+		{{> main}}
+	{{/if}}
+</template>
+
+<template name="main">
+	<h4>Login</h4>
+	<div class="uname">
+		<input type="text" class="username" id="username" />
+		<input type="button" value="Enter" class="enter btn"/>
+	</div>
+</template>
+
+<template name="greeting">
+	<div class="greeting">
+		{{username}}
+	</div>
+</template>
+
+<template name="posts">
+	<div class="main">
+		<div class="new">
+			<div class="link">
+				<input type="text" id="link"/>
+				<input type="button" value="share" class="share btn"/>
+			</div>
+		</div>
+		<div class="submitted">
+			
+			{{#each submitted_links}}
+				{{> post}}
+				<br/>
+				<br/>	
+			{{/each}}
+			
+		</div>
+	</div>
+</template>
+
+<template name="post">
+	<div class="main">
+		{{user}}
+		<br/>
+		{{link}}
+		<div class="voting">
+			<input type="button" value="Up" class="Up btn"/>
+			<input type="button" value="Down" class="Down btn"/>
+		</div>
+		<div class="comments">
+			<input type="text" id="comment"/>
+			<input type="button" value="comment" class="comment btn"/>
+			<div class="posted">
+				{{#each comments}}
+					{{> commentary}}
+				{{/each}}
+			</div>
+		</div>
+		<br/>
+		<br/>
+		{{score}}
+	</div>
+</template>
+
+<template name="friends">
+	<div class="main">
+		<h4>Friends of yours</h4>
+		<div class="new">
+			<div class="link">
+				<input type="text" id="friendname"/>
+				<input type="button" value="Friend" class="friend btn"/>
+			</div>
+		</div>
+		<div class="friends">
+			<ul>
+				{{#each friends}}
+					<li>{{> friend}}</li>
+				{{/each}}
+			</ul>
+		</div>
+	</div>
+</template>
+
+<template name="followers">
+	<div class="main">
+		<h4>Followers of yours</h4>
+		<div class="friends">
+			<ul>
+				{{#each followers}}
+					<li>{{> follower}}</li>
+				{{/each}}
+			</ul>
+		</div>
+	</div>
+</template>
+
+<template name="commentary">
+	{{comment}}
+</template>
+
+<template name="friend">
+	{{target}}
+</template>
+
+<template name="follower">
+	{{source}}
+</template>
